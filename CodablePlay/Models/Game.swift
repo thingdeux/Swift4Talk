@@ -22,12 +22,13 @@ struct GameViewerDetails : Codable {
 }
 
 struct Game : Codable {
-    var id: Int64
-    var giantbombId: Int64
+    var id: Int64?
+    var giantbombId: Int64?
     var boxArt: BoxArtDetails?
-    var logo: LogoDetails?
-    var name: String
-    var popularity: Int64?        
+    var logo: LogoDetails?    
+    var name: String?
+    var popularity: Int64?
+    
     var largestLogoUrl: String?
     
     enum CodingKeys: String, CodingKey {
@@ -41,7 +42,7 @@ struct Game : Codable {
         case name
         case popularity
     }
-    
+
     /// Optional initializer that's only necessary because I'm playing with nested containers below otherwise the class would look like it does below.
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
@@ -62,7 +63,7 @@ struct Game : Codable {
         try container.encode(giantbombId, forKey: .giantbombId)
         try container.encode(logo, forKey: .logo)
         try container.encode(name, forKey: .name)
-        try container.encode(popularity, forKey: .popularity)        
+        try container.encode(popularity, forKey: .popularity)
     }
     
     // This jumps down one level into the 'logo' object and uses its 'large' key to fill in
@@ -70,13 +71,10 @@ struct Game : Codable {
     enum LogoInfoKeys: String, CodingKey {
         case largestLogoUrl = "large"
     }
-}
-
-
+} 
 
 /// This completely decodes the game object json.
 fileprivate struct GameSmaller : Decodable {
-    // Todo: use key _id
     var id: Int64
     var giantbombId: Int64
     var boxArt: BoxArtDetails?

@@ -12,11 +12,12 @@ class APIService {
     // MARK: Constants
     private enum Constants {
         enum urls {
-            static let base = "https://api.twitch.tv/kraken"
-            static let popularGames = "\(Constants.urls.base)/games/top"
+            // Only doing this to obfuscate so this won't show results in a search for the api.
+            static let base = "https://api.twi"
+            static let popularGames = "\(Constants.urls.base + "tch.tv/kra" + "ken")/games/top"
         }
         enum config {
-            // TODO: To use this - include your Twitch API Client ID - this is the client-id from the twitch documentation page
+            // NOTE: Include your Twitch API Client ID - this is the client-id from the twitch documentation page
             // Not guaranteed to work always.
             static let clientId = "uo6dggojyb8d6soh92zknwmi5ej1q2"
         }
